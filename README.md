@@ -1,5 +1,7 @@
 # Slim3 Session Middleware
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/66698967b6ec44949eb30795f09a435e)](https://www.codacy.com/app/andrewdyer/slim3-session-middleware?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=andrewdyer/slim3-session-middleware&amp;utm_campaign=Badge_Grade)
+
 Simple middleware for the Slim Framework, which starts and allows managing of PHP built-in sessions. Also included is a useful Helper class.
 
 ## License
