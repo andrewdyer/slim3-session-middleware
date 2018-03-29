@@ -21,7 +21,7 @@ $app = new \Slim\App;
 $app->add(new \Slim\Middleware\SessionMiddleware([
     "autorefresh"   => true,
     "name"          => "myapp_session",
-    "lifetime"      => '1 hour' 
+    "lifetime"      => "1 hour" 
 ]));
 $app->run();
 ```
