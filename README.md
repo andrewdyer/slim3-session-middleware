@@ -1,14 +1,10 @@
 # Slim3 Session Middleware
 
-Simple middleware for Slim 3, which allows managing PHP built-in sessions and 
-includes a Helper class to help you with the $_SESSION superglobal.
+Simple middleware for the Slim Framework, which starts and allows managing of PHP built-in sessions. Also included is a useful Helper class.
 
 ## License
 
 Licensed under MIT. Totally free for private or commercial projects.
-
-## Requirements
-
 
 ## Installation
 
@@ -20,7 +16,11 @@ composer require andrewdyer/slim3-session-middleware
 
 ```php
 $app = new \Slim\App;
-$app->add(new \Slim\Middleware\SessionMiddleware());
+$app->add(new \Slim\Middleware\SessionMiddleware([
+    "autorefresh"   => true,
+    "name"          => "myapp_session",
+    "lifetime"      => '1 hour' 
+]));
 $app->run();
 ```
 
@@ -38,7 +38,7 @@ $app->run();
 
 ### Session Helper
 
-A Helper class is available, which you can attached to your app container:
+The `\Slim\Session\Helper` class can be attached to your app container:
 
 ```php
 $container = $app->getContainer();
@@ -46,4 +46,30 @@ $container = $app->getContainer();
 $container["session"] = function ($c) {
   return new \Slim\Session\Helper;
 };
+```
+
+The helper class can be used to check if a session variable exists in addition to setting, getting and deleting session variables.
+
+```php
+$session = new \Slim\Session\Helper;
+
+// Check if variable exists
+$exists = $session->exists("my_key");
+$exists = isset($session->my_key);
+$exists = isset($session["my_key"]);
+
+// Get variable value
+$value = $session->get("my_key", "default");
+$value = $session->my_key;
+$value = $session["my_key"];
+
+// Set variable value
+$session->set("my_key", "my_value");
+$session->my_key = "my_value";
+$session["my_key"] = "my_value";
+
+// Delete variable
+$session->delete("my_key");
+unset($session->my_key);
+unset($session["my_key"]);
 ```
