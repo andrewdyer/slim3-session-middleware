@@ -1,5 +1,5 @@
 {
-    "name": "andrewdyer/slim3-session",
+    "name": "andrewdyer/slim3-session-middleware",
     "description": "Session middleware and helper for Slim 3.",
     "type": "library",
     "keywords": [
