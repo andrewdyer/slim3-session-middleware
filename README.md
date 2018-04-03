@@ -28,15 +28,18 @@ $app->run();
 
 ### Supported Options
 
-* `autorefresh`: boolean: If you want session to be refresh when user activity is made (interaction with server). Set to `false` by default.
-* `domain`: string: Cookie domain, for example 'www.php.net'. To make cookies visible on  all subdomains then the domain must be prefixed with a dot like '.php.net'. Set to `null` as default.
-* `handler`: mixed: Custom session handler class or object. Must implement `SessionHandlerInterface` as required by PHP. Set to `null` as default.
-* `httponly`: boolean: If set to true then PHP will attempt to send the httponly flag when setting the session cookie. Set to `false` by default.
-* `ini_settings`: array: Associative array of custom session configuration. THis is set to null by default.
-* `lifetime`: int or string: The lifetime of the session cookie, defined in seconds. Default is `20 minutes`, but can be set to any value which `strtotime` can parse.
-* `name`: string: Name for the session cookie. Defaults to `session` instead of PHP's `PHPSESSID`.
-* `path`: string: The path on the domain where the cookie will work. Use a single slash ('/') for all paths on the domain. Set to `"/"` by default.
-* `secure`: boolean: Cookies will only be sent over secure connections if true.  Set to `false` by default.
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `autorefresh` | boolean | `false` | If you want session to be refresh when user activity is made (interaction with server). |
+| `domain` | tring | `null` | Cookie domain, for example 'www.php.net'. To make cookies visible on  all subdomains then the domain must be prefixed with a dot like '.php.net'. |
+| `handler` | mixed | `null` | Custom session handler class or object. Must implement `SessionHandlerInterface` as required by PHP. |
+| `httponly` | boolean | `false` | If set to true then PHP will attempt to send the httponly flag when setting the session cookie. |
+| `ini_settings` | array | `null` | Associative array of custom session configuration. |
+| `lifetime` | int or string | `"20 minutes"` | The lifetime of the session cookie. Can be set to any value which `strtotime` can parse. |
+| `name` | string | `"session"` | Name for the session cookie. Defaults to `session` instead of PHP's `PHPSESSID`. |
+| `path` |string | `"/"` | The path on the domain where the cookie will work. Use a single slash ('/') for all paths on the domain. |
+| `secure` | boolean | `false` | Cookies will only be sent over secure connections if true. |
+
 
 ### Session Helper
 
