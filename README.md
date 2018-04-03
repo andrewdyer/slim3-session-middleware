@@ -48,7 +48,7 @@ The `\Slim\Session\Helper` class can be attached to your app container:
 ```php
 $container = $app->getContainer();
 
-$container["session"] = function ($c) {
+$container["session"] = function ($container) {
   return new \Slim\Session\Helper;
 };
 ```
