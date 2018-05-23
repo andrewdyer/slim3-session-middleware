@@ -7,7 +7,7 @@
         "session",
         "middleware"
     ],
-    "homepage": "https://github.com/andrewdyer/slim3-session",
+    "homepage": "https://github.com/andrewdyer/slim3-session-middleware",
     "license": "MIT",
     "authors": [
         {
@@ -18,7 +18,7 @@
         }
     ],
     "support": {
-        "source": "https://github.com/andrewdyer/slim3-session.git"
+        "source": "https://github.com/andrewdyer/slim3-session-middleware.git"
     },
     "require": {
         "php": ">=5.5",
@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "Anddye\\": "src/"
         }
     },
     "minimum-stability": "stable",
