@@ -18,11 +18,13 @@ composer require andrewdyer/slim3-session-middleware
 
 ```php
 $app = new \Slim\App;
-$app->add(new \Slim\Middleware\SessionMiddleware([
+    
+$app->add(new \Anddye\Middleware\SessionMiddleware([
     "autorefresh"   => true,
     "name"          => "myapp_session",
     "lifetime"      => "1 hour" 
 ]));
+    
 $app->run();
 ```
 
@@ -43,38 +45,42 @@ $app->run();
 
 ### Session Helper
 
-The `\Slim\Session\Helper` class can be attached to your app container:
+The `\Anddye\Session\Helper` class can be attached to your app container:
 
 ```php
 $container = $app->getContainer();
-
+    
 $container["session"] = function ($container) {
-  return new \Slim\Session\Helper;
+  return new \Anddye\Session\Helper;
 };
 ```
 
 The helper class can be used to check if a session variable exists in addition to setting, getting and deleting session variables.
 
 ```php
-$session = new \Slim\Session\Helper;
-
+$session = new \Anddye\Session\Helper;
+    
 // Check if variable exists
 $exists = $session->exists("my_key");
 $exists = isset($session->my_key);
 $exists = isset($session["my_key"]);
-
+    
 // Get variable value
 $value = $session->get("my_key", "default");
 $value = $session->my_key;
 $value = $session["my_key"];
-
+    
 // Set variable value
 $session->set("my_key", "my_value");
 $session->my_key = "my_value";
 $session["my_key"] = "my_value";
-
+    
 // Delete variable
 $session->delete("my_key");
 unset($session->my_key);
 unset($session["my_key"]);
 ```
+
+## Useful Links
+
+* [Slim Framework](https://www.slimframework.com)
