@@ -1,6 +1,7 @@
 # Slim3 Session Middleware
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/66698967b6ec44949eb30795f09a435e)](https://www.codacy.com/app/andrewdyer/slim3-session-middleware?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=andrewdyer/slim3-session-middleware&amp;utm_campaign=Badge_Grade)
+[![Latest Stable Version](https://poser.pugx.org/andrewdyer/slim3-session-middleware/version)](https://packagist.org/packages/andrewdyer/slim3-session-middleware)
 [![Total Downloads](https://poser.pugx.org/andrewdyer/slim3-session-middleware/downloads)](https://packagist.org/packages/andrewdyer/slim3-session-middleware)
 
 Simple session middleware for the Slim Framework. Also included is a useful helper class that allows PHP built-in session management.
