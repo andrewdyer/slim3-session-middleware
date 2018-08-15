@@ -74,8 +74,6 @@ $container['session'] = function ($container) {
 The helper class can be used to check if a session variable exists in addition to setting, getting and deleting session variables.
 
 ```php
-
-// Check if variable exists
 $app->get('/', function (Request $request, Response $response) use ($container) {
     // Check if variable exists
     $exists = $container['session']->exists('my_key');
