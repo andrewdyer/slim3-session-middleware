@@ -5,6 +5,8 @@
 [![Total Downloads](https://poser.pugx.org/andrewdyer/slim3-session-middleware/downloads)](https://packagist.org/packages/andrewdyer/slim3-session-middleware)
 [![Latest Unstable Version](https://poser.pugx.org/andrewdyer/slim3-session-middleware/v/unstable)](//packagist.org/packages/andrewdyer/slim3-session-middleware)
 [![License](https://poser.pugx.org/andrewdyer/slim3-session-middleware/license)](https://packagist.org/packages/andrewdyer/slim3-session-middleware)
+[![Monthly Downloads](https://poser.pugx.org/andrewdyer/slim3-session-middleware/d/monthly)](https://packagist.org/packages/andrewdyer/slim3-session-middleware)
+[![Daily Downloads](https://poser.pugx.org/andrewdyer/slim3-session-middleware/d/daily)](https://packagist.org/packages/andrewdyer/slim3-session-middleware)
 [![composer.lock available](https://poser.pugx.org/andrewdyer/slim3-session-middleware/composerlock)](https://packagist.org/packages/andrewdyer/slim3-session-middleware)
 
 Simple session middleware for the Slim Framework. Also included is a useful helper class that allows PHP built-in session management.
@@ -22,14 +24,23 @@ composer require andrewdyer/slim3-session-middleware
 ## Usage
 
 ```php
-$app = new \Slim\App;
-    
+<?php
+
+$app = new \Slim\App();
+
 $app->add(new \Anddye\Middleware\SessionMiddleware([
-    "autorefresh"   => true,
-    "name"          => "myapp_session",
-    "lifetime"      => "1 hour" 
+    'autorefresh'   => true,
+    'name'          => 'myapp_session',
+    'lifetime'      => '1 hour',
 ]));
-    
+
+$app->get('/', function (Request $request, Response $response) use ($container) {
+    if (!isset($container['session']['loggedIn'])) {
+        //...
+    }
+    ///..
+});
+
 $app->run();
 ```
 
@@ -54,36 +65,38 @@ The `\Anddye\Session\Helper` class can be attached to your app container:
 
 ```php
 $container = $app->getContainer();
-    
-$container["session"] = function ($container) {
-  return new \Anddye\Session\Helper;
+
+$container['session'] = function ($container) {
+    return new \Anddye\Session\Helper();
 };
 ```
 
 The helper class can be used to check if a session variable exists in addition to setting, getting and deleting session variables.
 
 ```php
-$session = new \Anddye\Session\Helper;
-    
+
 // Check if variable exists
-$exists = $session->exists("my_key");
-$exists = isset($session->my_key);
-$exists = isset($session["my_key"]);
-    
-// Get variable value
-$value = $session->get("my_key", "default");
-$value = $session->my_key;
-$value = $session["my_key"];
-    
-// Set variable value
-$session->set("my_key", "my_value");
-$session->my_key = "my_value";
-$session["my_key"] = "my_value";
-    
-// Delete variable
-$session->delete("my_key");
-unset($session->my_key);
-unset($session["my_key"]);
+$app->get('/', function (Request $request, Response $response) use ($container) {
+    // Check if variable exists
+    $exists = $container['session']->exists('my_key');
+    $exists = isset($container['session']->my_key);
+    $exists = isset($container['session']['my_key']);
+
+    // Get variable value
+    $value = $container['session']->get('my_key', 'default');
+    $value = $container['session']->my_key;
+    $value = $container['session']['my_key'];
+
+    // Set variable value
+    $container['session']->set('my_key', 'my_value');
+    $container['session']->my_key = 'my_value';
+    $container['session']['my_key'] = 'my_value';
+
+    // Delete variable
+    $container['session']->delete('my_key');
+    unset($container['session']->my_key);
+    unset($container['session']['my_key']);
+});
 ```
 
 ## Useful Links
