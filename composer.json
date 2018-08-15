@@ -21,8 +21,8 @@
         "source": "https://github.com/andrewdyer/slim3-session-middleware.git"
     },
     "require": {
-        "php": ">=5.5",
-        "slim/slim": "^3.0"
+        "php": ">=5.5.0",
+        "slim/slim": "^3.10"
     },
     "autoload": {
         "psr-4": {
