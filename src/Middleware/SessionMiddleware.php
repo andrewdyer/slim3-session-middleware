@@ -6,71 +6,56 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
 /**
- * Class SessionMiddleware
- * 
- * @author Andrew Dyer <andrewdyer@outlook.com>
- * @category Middleware
- * @see https://github.com/andrewdyer/slim3-session-middleware
+ * Class SessionMiddleware.
  */
 class SessionMiddleware
 {
-
     /**
-     *
-     * @var boolean 
+     * @var bool
      */
     protected $auto_refresh = false;
 
     /**
-     *
-     * @var mixed 
+     * @var mixed
      */
     protected $domain = null;
 
     /**
-     *
-     * @var mixed 
+     * @var mixed
      */
     protected $handler = null;
 
     /**
-     *
-     * @var boolean 
+     * @var bool
      */
     protected $httponly = false;
 
     /**
-     *
-     * @var array 
+     * @var array
      */
     protected $ini_settings = [];
 
     /**
-     *
-     * @var string 
+     * @var string
      */
-    protected $name = "session";
+    protected $name = 'session';
 
     /**
-     *
-     * @var string 
+     * @var string
      */
-    protected $path = "/";
+    protected $path = '/';
 
     /**
-     *
-     * @var boolean 
+     * @var bool
      */
     protected $secure = false;
 
     /**
-     *
-     * @var mixed 
+     * @var mixed
      */
-    protected $lifetime = "20 minutes";
+    protected $lifetime = '20 minutes';
 
     /**
-     * 
      * @param array $settings
      */
     public function __construct(array $settings = [])
@@ -91,20 +76,20 @@ class SessionMiddleware
         // Set the configuration options.
         $this->configure($this->ini_settings);
 
-        // If the maxlifetime is less than the ttl, update the configuration of 
+        // If the maxlifetime is less than the ttl, update the configuration of
         // the maxlifetime to bt the value of tll multiplied.
-        if (ini_get("session.gc_maxlifetime") < $this->lifetime) {
+        if (ini_get('session.gc_maxlifetime') < $this->lifetime) {
             $this->configure([
-                "session.gc_maxlifetime" => $this->lifetime * 2,
+                'session.gc_maxlifetime' => $this->lifetime * 2,
             ]);
         }
     }
 
     /**
-     * 
-     * @param ServerRequestInterface $request PSR7 request
-     * @param ResponseInterface $response PSR7 response
-     * @param callable $next Next middleware
+     * @param Request  $request  PSR7 request
+     * @param Response $response PSR7 response
+     * @param callable $next     Next middleware
+     *
      * @return Response
      */
     public function __invoke(Request $request, Response $response, callable $next)
@@ -113,7 +98,7 @@ class SessionMiddleware
         session_set_cookie_params($this->lifetime, $this->path, $this->domain, $this->secure, $this->httponly);
 
         // Refresh session cookie when sessions are enabled, but none exists.
-        $sessionsEnabledNoneExists = session_status() === PHP_SESSION_NONE;
+        $sessionsEnabledNoneExists = PHP_SESSION_NONE === session_status();
         if ($sessionsEnabledNoneExists and $this->auto_refresh and isset($_COOKIE[$this->name])) {
             setcookie($this->name, $_COOKIE[$this->name], time() + $this->lifetime, $this->path, $this->domain, $this->secure, $this->httponly);
         }
@@ -124,7 +109,7 @@ class SessionMiddleware
         // Set the user-level session storage functions
         if ($this->handler) {
             if (!($this->handler instanceof \SessionHandlerInterface)) {
-                $this->handler = new $this->handler;
+                $this->handler = new $this->handler();
             }
             session_set_save_handler($this->handler, true);
         }
@@ -143,19 +128,18 @@ class SessionMiddleware
     }
 
     /**
-     * 
      * @param array $settings
+     *
      * @return $this
      */
     private function configure(array $settings)
     {
         foreach ($settings as $key => $value) {
-            if (strpos($key, "session.") === 0) {
+            if (0 === strpos($key, 'session.')) {
                 ini_set($key, $value);
             }
         }
 
         return $this;
     }
-
 }
