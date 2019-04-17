@@ -97,6 +97,14 @@ $app->get('/', function (Request $request, Response $response) use ($container) 
 });
 ```
 
+## Support
+
+If you are having general issues with this library, then please feel free to contact me on [Twitter](https://twitter.com/andyer92).
+
+If you believe you have found an issue, please report it using the [issue tracker](https://github.com/andrewdyer/slim3-session-middleware/issues), or better yet, fork the repository and submit a pull request.
+
+If you're using this package, I'd love to hear your thoughts!
+
 ## Useful Links
 
 * [Slim Framework](https://www.slimframework.com)
